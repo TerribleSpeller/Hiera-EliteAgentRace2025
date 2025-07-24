@@ -40,3 +40,323 @@ a {
     color-scheme: dark;
   }
 }
+
+ul {
+  margin-bottom: 0rem !important;
+}
+
+/* For Registering Leads */
+
+.lead-form {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Modal */
+
+.modal {
+  display: block;
+  /* Show the modal */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  /* Could be more or less, depending on screen size */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*Notification Button*/
+.notification-badge {
+
+  border-radius: 50%;
+
+}
+
+.fixed-width {
+  width: 150px;
+  /* Adjust the width as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fixedSizeChart {
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+}
+
+
+footer .red-ribbon {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  padding-bottom: 1rem;
+  margin-top: -16px;
+}
+
+
+footer .red-ribbon .ribbon.red {
+  z-index: 1;
+  left: 0;
+  width: calc(100% - 180px);
+  background: #dd1b20;
+}
+
+
+
+footer .red-ribbon .ribbon.black {
+  right: 0;
+  z-index: 2;
+  bottom: 1rem;
+  width: 180px;
+  background: #2a2931;
+}
+
+
+footer .red-ribbon .ribbon {
+  height: 49px;
+  position: absolute;
+  bottom: 1rem;
+}
+
+
+footer .red-ribbon img {
+  height: 65px;
+  z-index: 3;
+}
+
+
+img,
+svg {
+  vertical-align: middle;
+}
+
+footer .red-ribbon .ribbon.black-bottom {
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  height: 1rem;
+  width: 100%;
+  background: #2a2931;
+}
+
+footer .red-ribbon .ribbon {
+  height: 49px;
+  position: absolute;
+  bottom: 1rem;
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+
+@media (min-width: 1200px) {
+  .ribbon.red {
+    padding: 7px 0 !important;
+  }
+}
+
+@media (min-width: 768px) {
+  footer .red-ribbon img {
+    height: 90px;
+  }
+
+  footer .red-ribbon .ribbon {
+    height: 68px;
+  }
+
+  footer .red-ribbon .ribbon.black {
+    width: 247px;
+  }
+
+  footer .red-ribbon .ribbon.red {
+    width: calc(100% - 247px);
+  }
+
+  footer .red-ribbon {
+    margin-top: -22px;
+  }
+
+}
+
+.cool-background {
+  height: 100vh;
+  /* Full height of the viewport */
+  overflow: hidden;
+  /* Prevent scrolling */
+  /* background-color: #ffffff; */
+  /* background-image: url('../public/background-2.jpg'); */
+  /* background-image: url('../public/Picture2.png'); */
+  background: linear-gradient(90deg, #bf5340, #ff8200);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  /* Keeps the image centered */
+  opacity: 0.9;
+}
+
+.circle-cutout {
+  position: relative;
+  width: 69vh;
+  /* Adjusted size of the circle */
+  height: 69vh;
+  /* Adjusted size of the circle */
+  margin-top: 13.4vh;
+  /* Lowered the circle by 5vh */
+  background-color: transparent;
+  border-radius: 50%;
+  clip-path: circle(50% at center);
+  /* background-image: url('../public/background-2.jpg'); */
+  /* background-image: url('../public/Picture2.png'); */
+  background-color: #FDDc5c;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.9);
+  /* Creates the cutout effect */
+}
+
+.fill-background {
+  min-height: 100svh;
+}
+
+.color-test {
+  color: #ffffff;
+  /* White text for contrast */
+  font-size: 1.5rem;
+  /* Larger font size for readability */
+  font-weight: bold;
+  /* Bold text for emphasis */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  /* Subtle shadow for depth */
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  /* Gradient background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Soft shadow for a lifted effect */
+}
+
+.top-height {
+  height: 19vh;
+  /*background: linear-gradient(90deg, #6a11cb, #2575fc); /* Unique gradient for the top row */
+}
+
+.other-heights {
+  height: 6.25vh;
+}
+
+.other-heights:nth-child(1) {
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  /* Layer 1 */
+}
+
+.other-heights:nth-child(2) {
+  background: linear-gradient(90deg, #43cea2, #185a9d);
+  /* Layer 2 */
+}
+
+.other-heights:nth-child(3) {
+  background: linear-gradient(90deg, #ff9966, #ff5e62);
+  /* Layer 3 */
+}
+
+.other-heights:nth-child(4) {
+  background: linear-gradient(90deg, #56ab2f, #a8e063);
+  /* Layer 4 */
+}
+
+.other-heights:nth-child(5) {
+  background: linear-gradient(90deg, #614385, #516395);
+  /* Layer 5 */
+}
+
+.other-heights:nth-child(6) {
+  background: linear-gradient(90deg, #eecda3, #ef629f);
+  /* Layer 6 */
+}
+
+.other-heights:nth-child(7) {
+  background: linear-gradient(90deg, #02aab0, #00cdac);
+  /* Layer 7 */
+}
+
+.other-heights:nth-child(8) {
+  background: linear-gradient(90deg, #ff8200, #00cdac);
+  /* Layer 7 */
+}
+
+.winner-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  /* White text for contrast */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  /* Subtle shadow for depth */
+}
+
+.opacity-text {
+  opacity: 0.3;
+}
