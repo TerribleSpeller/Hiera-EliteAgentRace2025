@@ -242,12 +242,12 @@ footer .red-ribbon .ribbon {
 .cool-background {
   height: 100vh;
   /* Full height of the viewport */
-  overflow: hidden;
+  overflow: auto;
   /* Prevent scrolling */
   /* background-color: #ffffff; */
   /* background-image: url('../public/background-2.jpg'); */
   /* background-image: url('../public/Picture2.png'); */
-  background: linear-gradient(90deg, #bf5340, #ff8200);
+  background: linear-gradient(90deg, #ffb47b, #8dd5ff);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -257,7 +257,7 @@ footer .red-ribbon .ribbon {
 
 .circle-cutout {
   position: relative;
-  width: 69vh;
+  width: 50vh;
   /* Adjusted size of the circle */
   height: 69vh;
   /* Adjusted size of the circle */
@@ -359,4 +359,45 @@ footer .red-ribbon .ribbon {
 
 .opacity-text {
   opacity: 0.3;
+}
+
+.text-white {
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Subtle shadow for depth */
+}
+
+h1 {
+  font-size: 2.5rem; /* Larger font size for emphasis */
+  font-weight: bold; /* Bold text for prominence */
+  margin-bottom: 10px; /* Spacing below the title */
+  text-align: center; /* Center align the title */
+  background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradient background */
+  background-clip: text; /* Standard property for compatibility */
+  -webkit-background-clip: text; /* Clip the gradient to the text */
+  -webkit-text-fill-color: transparent; /* Make the background visible */
+}
+
+p {
+  font-size: 1.2rem; /* Slightly larger font size for readability */
+  color: #ffffff; /* White text for contrast */
+  text-align: center; /* Center align the description */
+  margin-top: 0;
+  margin-bottom: 20px; /* Spacing below the description */
+}
+
+.text-center.d-flex {
+  font-size: 1.5rem; /* Larger font size for readability */
+  font-weight: bold; /* Bold text for emphasis */
+  color: #ffffff; /* White text for contrast */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Subtle shadow for depth */
+  background: linear-gradient(90deg, #43cea2, #185a9d); /* Gradient background */
+  padding: 10px; /* Padding for spacing */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for a lifted effect */
+}
+
+.racing-background {
+  background-image: url('../public/bg-4-repeat.png');
+  background-size: contain;
 }
