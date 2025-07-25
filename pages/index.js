@@ -119,8 +119,8 @@ export default function Home() {
                 Object.entries(bunchofShit).map(([agent, progress], index) => {
                   const displayName = splitAgentName(agent);
                   return (
-                    <div key={agent} className="row justify-content-center align-items-center px-5 py-5">
-                      <div className="col-10 position-relative px-5">
+                    <div key={agent} className="row justify-content-center align-items-center px-md-5 py-5 px-sm-0" >
+                      <div className="col-10 col-12-sm position-relative px-md-5 px-sm-0">
                         {/* <h3 className="text-center" style={{ color: "white" }}>{agent}</h3> */}
                         <div className="progress position-relative" style={{ overflow: "visible" }}>
                           <div
