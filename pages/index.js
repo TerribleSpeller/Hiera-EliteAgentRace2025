@@ -7,12 +7,19 @@ import { Chart } from "chart.js";
 import ChartFormat from '../components/chartjs-config';
 import { getDatabase, ref, get, onValue, child, set, push, query, update, remove } from 'firebase/database';
 import { database } from '../lib/firebaseConfig';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 
 const db = database;
+const auth = getAuth();
+
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [bunchofShit, setBunchofShit] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const dbRef = ref(db, 'CoordinationSystem/EliteHieraRace/');
@@ -29,6 +36,16 @@ export default function Home() {
 
     return () => unsubscribe(); // Cleanup the listener on unmount
   }, []);
+
+  const handleLogin = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log("Logged in as:", userCredential.user);
+      window.location.href = "/dashboard"; // Redirect to another page
+    } catch (err) {
+      setError("Invalid email or password");
+    }
+  };
 
   const exampleData = {
     "8": [],
@@ -50,6 +67,8 @@ export default function Home() {
   const daysLeft = Math.floor(differential / (1000 * 60 * 60 * 24)) % 30;
   const hoursLeft = Math.floor(differential / (1000 * 60 * 60)) % 24;
 
+  const splitAgentName = (name) => name.replace(/([a-z])([A-Z])/g, "$1 $2");
+
 
 
 
@@ -59,7 +78,22 @@ export default function Home() {
         <div className="container mt-5">
           <div className="row">
             <div className="col-12 col-md-7 order-1 order-md-2">
-              <Image style={{ float: "right" }} src="/topbar.png" alt="Description" width={300} height={100} />
+              <div className="row justify-content-end">
+                <div className="col">
+
+                </div>
+                <div className="col-12 col-md-6 text-end">
+                  <Image style={{ float: "right" }} src="/topbar.png" alt="Description" width={300} height={100} />
+
+                </div>
+              </div>
+              <div className="row">
+                <div className="text-end mt-3">
+                  <button className="btn btn-primary btn-sm" onClick={() => setShowModal(true)}>
+                    Login
+                  </button>
+                </div>
+              </div>
             </div>
             <div className="col-12 col-md-5 order-2 order-md-1">
               <div className="row justify-content-left">
@@ -82,76 +116,79 @@ export default function Home() {
             <div className="racing-background">
 
               {
-                Object.entries(bunchofShit).map(([agent, progress], index) => (
-                  <div key={agent} className="row justify-content-center align-items-center px-5 py-5">
-                    <div className="col-10 position-relative px-5">
-                      {/* <h3 className="text-center" style={{ color: "white" }}>{agent}</h3> */}
-                      <div className="progress position-relative" style={{ overflow: "visible" }}>
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: `${(progress / 8) * 100}%` }}
-                          aria-valuenow={progress}
-                          aria-valuemin="0"
-                          aria-valuemax="8"
-                        >
-                          {/* {progress}/8 */}
-                        </div>
-                        <img
-                          src={`/car${(index % 8) + 1}.png`} // Cycles through car1.png to car5.png
-                          alt="Avatar"
-                          className="position-absolute"
-                          style={{
-                            top: "-3vh", // Moves the avatar above the progress bar
-                            left: `${(progress / 8) * 100}%`,
-                            transform: "translate(-50%, 0)", // Adjusts horizontal alignment
-                            width: "clamp(150px, 30vw, 250px)", // Dynamically sized based on viewport width
-                            height: "auto", // Maintains aspect ratio
-                            borderRadius: "50%",
-                            zIndex: 10, // Ensures it appears above other elements
-                          }}
-                        />
-                        {progress > 0 && (
+                Object.entries(bunchofShit).map(([agent, progress], index) => {
+                  const displayName = splitAgentName(agent);
+                  return (
+                    <div key={agent} className="row justify-content-center align-items-center px-5 py-5">
+                      <div className="col-10 position-relative px-5">
+                        {/* <h3 className="text-center" style={{ color: "white" }}>{agent}</h3> */}
+                        <div className="progress position-relative" style={{ overflow: "visible" }}>
+                          <div
+                            className="progress-bar"
+                            role="progressbar"
+                            style={{ width: `${(progress / 8) * 100}%` }}
+                            aria-valuenow={progress}
+                            aria-valuemin="0"
+                            aria-valuemax="8"
+                          >
+                            {/* {progress}/8 */}
+                          </div>
                           <img
-                            src={`/${progress}.png`} // Cycles through car1.png to car5.png
-                            alt="AvatarUnit"
+                            src={`/car${(index % 8) + 1}.png`} // Cycles through car1.png to car5.png
+                            alt="Avatar"
                             className="position-absolute"
                             style={{
                               top: "-3vh", // Moves the avatar above the progress bar
                               left: `${(progress / 8) * 100}%`,
-                              transform: "translate(-140%, 15%)", // Adjusts horizontal alignment
-                              width: "clamp(30px, 3vw, 250px)", // Dynamically sized based on viewport width
+                              transform: "translate(-50%, 0)", // Adjusts horizontal alignment
+                              width: "clamp(150px, 30vw, 250px)", // Dynamically sized based on viewport width
                               height: "auto", // Maintains aspect ratio
                               borderRadius: "50%",
                               zIndex: 10, // Ensures it appears above other elements
                             }}
                           />
-                        )}
-                        <div
-                          className="position-absolute text-center"
-                          style={{
-                            top: "calc(-3vh + 50px)", // Adjusts position to follow the avatar
-                            left: `${(progress / 8) * 100}%`,
-                            transform: "translate(-50%, 0)", // Centers the text below the avatar
-                            zIndex: 11, // Ensures it appears above other elements
-                          }}
-                        >
-                          <span
+                          {progress > 0 && (
+                            <img
+                              src={`/${progress}.png`} // Cycles through car1.png to car5.png
+                              alt="AvatarUnit"
+                              className="position-absolute"
+                              style={{
+                                top: "-3vh", // Moves the avatar above the progress bar
+                                left: `${(progress / 8) * 100}%`,
+                                transform: "translate(-140%, 15%)", // Adjusts horizontal alignment
+                                width: "clamp(30px, 3vw, 250px)", // Dynamically sized based on viewport width
+                                height: "auto", // Maintains aspect ratio
+                                borderRadius: "50%",
+                                zIndex: 10, // Ensures it appears above other elements
+                              }}
+                            />
+                          )}
+                          <div
+                            className="position-absolute text-center"
                             style={{
-                              backgroundColor: "rgba(0, 0, 0, 0.9)", // Adds a semi-transparent bubble
-                              color: "white",
-                              padding: "5px 10px",
-                              borderRadius: "15px",
-                              fontSize: "clamp(10px, 1.5vw, 16px)", // Dynamically sized text
+                              top: "calc(-3vh + 50px)", // Adjusts position to follow the avatar
+                              left: `${(progress / 8) * 100}%`,
+                              transform: "translate(-50%, 0)", // Centers the text below the avatar
+                              zIndex: 11, // Ensures it appears above other elements
                             }}
                           >
-                            {agent}
-                          </span>
+                            <span
+                              style={{
+                                backgroundColor: "rgba(0, 0, 0, 0.9)", // Adds a semi-transparent bubble
+                                color: "white",
+                                padding: "5px 10px",
+                                borderRadius: "15px",
+                                fontSize: "clamp(10px, 1.5vw, 16px)", // Dynamically sized text
+                              }}
+                            >
+                              {displayName}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))
+                  )
+                })
               }
               <div className="py-5">
 
@@ -162,6 +199,45 @@ export default function Home() {
           </div>
         </div>
       </div >
+
+
+      {showModal && (
+        <div className="modal" style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Login</h5>
+                <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
+              </div>
+              <div className="modal-body">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="form-control mb-3"
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="form-control mb-3"
+                />
+                {error && <p className="text-danger">{error}</p>}
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>
+                  Close
+                </button>
+                <button type="button" className="btn btn-primary" onClick={handleLogin}>
+                  Login
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
